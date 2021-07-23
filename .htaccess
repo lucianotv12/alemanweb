@@ -1,0 +1,33 @@
+RewriteEngine on
+
+#RewriteCond %{HTTP_HOST} ^laiken.com.ar [NC]
+#RewriteRule ^(.*)$ http://www.laiken.com.ar/$1 [L,R=301]
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^(.+)\.html index.php?accion=$1 
+RewriteRule ^([a-zA-Z0-9_-]+)/(.*)/$ index.php?accion=$1&id=$2
+RewriteRule ^([a-zA-Z0-9_-]+)-(.*)-(.*)$ index.php?accion=$1&id=$2&tipo=$3
+
+Options -Indexes
+
+<IfModule mod_expires.c>
+<filesmatch "\.(jpg|JPG|gif|GIF|png|PNG|css|js)$">
+ExpiresActive on
+ExpiresDefault "access plus 30 day"
+</filesmatch>
+</IfModule>
+
+#<FilesMatch "\.(eot|ttf|otf|woff)">
+ #   Header set Access-Control-Allow-Origin "*"
+#</FilesMatch>
+
+#ExpiresActive On
+#ExpiresDefault "now plus 2 days"
+
+#order deny,allow
+#deny from all
+#allow from 181.47.212.19
+
+
